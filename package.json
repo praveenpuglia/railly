@@ -11,10 +11,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
+    "material-design-icons": "^3.0.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.16",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.9",
@@ -25,6 +27,7 @@
     "@vue/test-utils": "^1.0.0-beta.10",
     "chai": "^4.1.2",
     "lint-staged": "^6.0.0",
+    "node": "9.11",
     "vue-cli-plugin-vuetify": "^0.1.2",
     "vue-template-compiler": "^2.5.13"
   },

@@ -1,18 +1,8 @@
 <template>
-  <v-app>
-    <v-navigation-drawer
-      persistent
-      v-model="drawer"
-      enable-resize-watcher
-      fixed
-      app
-    >
+  <v-app class="railly-app">
+    <v-navigation-drawer persistent v-model="drawer" enable-resize-watcher fixed app>
       <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        >
+        <v-list-tile :to="item.path" v-for="(item, i) in items" :key="i">
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
@@ -22,13 +12,9 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
-      app
-      dark
-      color="primary"
-    >
+    <v-toolbar app dark color="primary">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-toolbar-title>{{title}} &mdash; {{$store.getters.page}}</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <transition name="slide">
@@ -46,7 +32,13 @@ export default {
       items: [
         {
           icon: "search",
+          path: "pnr",
           title: "PNR Status"
+        },
+        {
+          icon: "train",
+          path: "train-details",
+          title: "Train Details"
         }
       ],
       title: "Railly",
@@ -56,6 +48,10 @@ export default {
 };
 </script>
 <style>
+.railly-app {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
 .slide-enter-active {
   transition: all 0.3s ease;
 }

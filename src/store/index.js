@@ -4,8 +4,23 @@ import pnr from "./pnr";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    page: ""
+  },
+  mutations: {
+    setPage(state, page) {
+      state.page = page;
+    }
+  },
+  getters: {
+    page(state) {
+      return state.page;
+    }
+  },
+  actions: {
+    setPage({ commit }, page) {
+      commit("setPage", page);
+    }
+  },
   modules: { pnr }
 });
