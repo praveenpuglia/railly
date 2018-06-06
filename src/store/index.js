@@ -7,20 +7,12 @@ export default new Vuex.Store({
   state: {
     page: ""
   },
-  mutations: {
-    setPage(state, page) {
-      state.page = page;
-    }
-  },
+  mutations: {},
   getters: {
     page(state) {
       return state.page;
     }
   },
-  actions: {
-    setPage({ commit }, page) {
-      commit("setPage", page);
-    }
-  },
+  actions: {},
   modules: { pnr }
 });

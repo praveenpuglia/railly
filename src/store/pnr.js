@@ -2,8 +2,9 @@ import axios from "axios";
 export default {
   state: {
     status: null,
-    loading: false,
-    dataLoaded: false
+    fetchingPnrStatus: false,
+    dataLoaded: false,
+    searchedPnrs: []
   },
   mutations: {
     setPnrStatus(state, status) {
@@ -14,11 +15,19 @@ export default {
     },
     fetchPnrSuccess(state, newState) {
       Object.assign(state, newState);
+    },
+    fetchSearchedPnrSuccess(state, searchedPnrs) {
+      Object.assign(state, { searchedPnrs });
+    }
+  },
+  getters: {
+    searchedPnrs: state => {
+      return state.searchedPnrs;
     }
   },
   actions: {
-    fetchPnr({ commit }, pnrNumber) {
-      commit("fetchPnr", { loading: true });
+    fetchPnr({ commit, dispatch }, pnrNumber) {
+      commit("fetchPnr", { fetchingPnrStatus: true });
       axios
         .get(
           `https://api.railwayapi.com/v2/pnr-status/pnr/${pnrNumber}/apikey/hw1jytnyce/`
@@ -26,13 +35,30 @@ export default {
         .then(res => {
           commit("fetchPnrSuccess", {
             status: res.data,
-            loading: false,
+            fetchingPnrStatus: false,
             dataLoaded: true
           });
+          dispatch("saveSearchedPnr", res.data);
         })
         .catch(e => {
           console.log(e);
         });
+    },
+    fetchSearchedPnrs({ commit, state }) {
+      const searchedPnrs = window.localStorage.searchedPnrs;
+      commit(
+        "fetchSearchedPnrSuccess",
+        searchedPnrs ? JSON.parse(searchedPnrs) : state.searchedPnrs
+      );
+    },
+    saveSearchedPnr({ dispatch, state }, searchResults) {
+      let searchedPnrs = window.localStorage.searchedPnrs;
+      searchedPnrs = searchedPnrs
+        ? JSON.parse(searchedPnrs)
+        : state.searchedPnrs;
+      searchedPnrs.push(searchResults);
+      window.localStorage.searchedPnrs = JSON.stringify(searchedPnrs);
+      dispatch("fetchSearchedPnrs");
     }
   }
 };

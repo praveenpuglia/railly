@@ -1,26 +1,25 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import About from "./views/About.vue";
-import PnrStatus from "./views/PnrStatus.vue";
+import PnrStatus from "./views/pnr/PnrStatus.vue";
+import PnrHome from "./views/pnr/PnrHome.vue";
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
       component: Home
     },
     {
       path: "/pnr",
-      name: "pnr",
-      component: PnrStatus
+      component: PnrHome,
+      name: "pnrHome"
     },
     {
-      path: "/about",
-      name: "about",
-      component: About
+      name: "pnrStatus",
+      path: "/pnr/:pnrNumber",
+      component: PnrStatus
     }
   ]
 });

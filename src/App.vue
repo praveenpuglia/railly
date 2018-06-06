@@ -14,7 +14,7 @@
     </v-navigation-drawer>
     <v-toolbar app dark color="primary">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>{{title}} &mdash; {{$store.getters.page}}</v-toolbar-title>
+      <v-toolbar-title>{{title}}</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <transition name="slide">
@@ -32,12 +32,12 @@ export default {
       items: [
         {
           icon: "search",
-          path: "pnr",
+          path: "/pnr",
           title: "PNR Status"
         },
         {
           icon: "train",
-          path: "train-details",
+          path: "/train-details",
           title: "Train Details"
         }
       ],
